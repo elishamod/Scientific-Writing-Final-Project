@@ -10,10 +10,13 @@ import os
 # Settings
 DATABASE_DIRC = "database"
 BASE_URL = "http://export.arxiv.org/api/query"
-CATEGORIES = ["astro-ph.HE", "astro-ph.GA", "astro-ph.CO", "astro-ph.EP", "astro-ph.IM", "astro-ph.SR",
-              "astro-ph.*", "cond-mat.*", "hep-*", "nucl-*", "cs.*"]
-START_YEAR = 2019
-END_YEAR = 2025
+# CATEGORIES = ["astro-ph.HE", "astro-ph.GA", "astro-ph.CO", "astro-ph.EP", "astro-ph.IM", "astro-ph.SR",
+#               "astro-ph.*", "cond-mat.*", "hep-*", "nucl-*", "cs.*"]
+# START_YEAR = 2019
+# END_YEAR = 2025
+CATEGORIES = ["cs.*"]
+START_YEAR = 2022
+END_YEAR = 2022
 MAX_RESULTS_PER_MONTH = 250
 RESULTS_PER_REQUEST = 250
 TARGET_WORDS = ["leverag", "robust", "novel", "utiliz", "paradigm", "comprehensive", "boast", "convey",
@@ -22,7 +25,8 @@ TARGET_WORDS = ["leverag", "robust", "novel", "utiliz", "paradigm", "comprehensi
                 "intricate", "valuable", "exceptional", "notabl", "innovative", "primarily", "critical",
                 "thoroughly", "subsequently", "particularly", "thereby", "significant", "foster",
                 "crucial", "effectively", "additionally", "enhance", "capabilities", "paramount",
-                "vital", "uncover", "unveil", "untangle"]
+                "vital", "uncover", "unveil", "untangle", "albeit", "endeavor", "herein", "show",
+                "small", "find", "help", "discover", "look", "need", "change", "make", "thing"]
 
 
 def main():
@@ -87,7 +91,8 @@ def extract_data():
 
 
 def save_csv(quarter_data, category):
-    filename = os.path.join(DATABASE_DIRC, f"data_{category_name(category)}.csv")
+    # filename = os.path.join(DATABASE_DIRC, f"data_{category_name(category)}.csv")
+    filename = os.path.join(DATABASE_DIRC, f"_data_{category_name(category)}.csv")
     rows = []
     for quarter in sorted(quarter_data.keys()):
         for word in TARGET_WORDS:

@@ -6,6 +6,8 @@
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
 \usepackage{colortbl}
+\usepackage{natbib}
+\usepackage{amsmath}
 
 \newcommand{\vdag}{(v)^\dagger}
 \newcommand\aastex{AAS\TeX}
@@ -26,7 +28,7 @@ This paper...
 
 \end{abstract}
 
-\keywords{\uat{Galaxies}{573}}
+% \keywords{\uat{Galaxies}{573}}
 %% You can use the \uat command to link your UAT concepts back its source.
 % \keywords{\uat{Galaxies}{573} --- \uat{Cosmology}{343} --- \uat{High Energy astrophysics}{739} --- \uat{Interstellar medium}{847} --- \uat{Stellar astronomy}{1583} --- \uat{Solar physics}{1476}}
 
@@ -42,6 +44,10 @@ This paper...
     \item Is there a marked difference between astro and other fields in physics?
 \end{enumerate}
 
+% make the list into a full introduction text
+ChatGPT was introduced in December 2023 by OpenAI as a revolutionary large language model (LLM), capable of understanding and generating human-like text \cite{Roumeliotis2023}.
+Since its release, many other LLMs with similar capabilities have emerged, and these models are now widely used for various tasks, including writing and coding.
+
 
 \section{Methods}
 
@@ -55,12 +61,15 @@ This paper...
 
 \section{Results}
 
-\begin{table}[ht]
+\begin{table*}[h]
 \centering
 \scriptsize
+\setlength{\tabcolsep}{3pt}
 \input{scripts/ztest/colored_factor_increase_table.tex}
-\caption{Factor increase in word usage after ChatGPT, by arXiv category. Blank cells indicate non-significant changes ($p \geq 0.05$).}
-\end{table}
+\caption{Factor increase in word usage after the introduction of ChatGPT, by arXiv category.
+Blank cells indicate non-significant changes ($p \geq 0.05$).
+The color scale indicates the magnitude of the factor increase, with darker yellow representing larger increases.}
+\end{table*}
 
 \section{Conclusions}
 

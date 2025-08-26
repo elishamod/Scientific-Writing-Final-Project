@@ -7,11 +7,19 @@ path_pattern = "ztest/ztest_*.csv"  # Adjust path if needed
 output_tex_file = "ztest/colored_factor_increase_table.tex"
 max_shading_value = 5  # Anything >= this will get full blue (blue!100)
 
+# === Category order ===
+categories_in_order = ["astro-ph.CO", "astro-ph.EP", "astro-ph.GA", "astro-ph.HE",
+                       "astro-ph.IM", "astro-ph.SR", "astro-ph",
+                       "cond-mat", "hep", "nucl", "cs"]
+
+
 # === Step 1: Load all CSVs and extract factor increases ===
 all_results = {}
 
-for filepath in glob.glob(path_pattern):
-    category = os.path.basename(filepath).removeprefix("ztest_").removesuffix(".csv")
+# for filepath in glob.glob(path_pattern):
+#     category = os.path.basename(filepath).removeprefix("ztest_").removesuffix(".csv")
+for category in categories_in_order:
+    filepath = path_pattern.replace("*", category)
     df = pd.read_csv(filepath)
 
     # Keep only statistically significant results
@@ -35,7 +43,7 @@ def color_cell(val, max_val=max_shading_value):
     if pd.isna(val):
         return ""
     shade = int(min(val, max_val) / max_val * 100)
-    return r"\cellcolor{blue!%d} %.2f" % (shade, val)
+    return r"\cellcolor{yellow!%d} %.2f" % (shade, val)
 
 colored_df = combined_df.applymap(color_cell)
 
@@ -44,7 +52,7 @@ with open(output_tex_file, "w") as f:
     latex_table = colored_df.to_latex(
         na_rep="",
         escape=False,  # allow LaTeX commands like \cellcolor
-        column_format="l" + "r" * len(colored_df.columns),
+        column_format="|l|" + "c|" * len(colored_df.columns),
         multicolumn=False,
         multicolumn_format="c"
     )
