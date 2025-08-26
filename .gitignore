@@ -1,4 +1,6 @@
 **/*.csv
 scripts/database/
 scripts/ztest/
+main.*
+!main.tex
 
