@@ -21,12 +21,12 @@
 \begin{abstract}
 
 Large language models (LLMs) have been rapidly adopted across scientific workflows, and their influence on scientific work has been observed in many studies.
-We quantify changes in vocabulary usage in arXiv abstracts by analyzing astrophysics subcategories (astro-ph.CO/EP/GA/HE/IM/SR) alongside other physics areas (cond-mat, hep, nucl) and computer science (cs).
+We quantify changes in vocabulary usage in arXiv abstracts by analyzing Astrophysics subcategories (astro-ph.CO/EP/GA/HE/IM/SR) alongside other physics areas (cond-mat, hep, nucl) and Computer Science (cs).
 Using the arXiv API, we collect up to 250 abstracts per month per category from January 2019 through June 2025, and measure frequencies for a curated list of terms that are commonly associated with LLM-generated text, along with some comparison terms.
 We calculate the post-ChatGPT factor increase relative to a pre-ChatGPT baseline (threshold December 2022) for each category, and assess significance with z-tests.
-We find statistically significant increases in LLM-favored vocabulary across all domains after the introduction of ChatGPT, with the greatest change in computer science.
+We find statistically significant increases in LLM-favored vocabulary across all domains after the introduction of ChatGPT, with the greatest change in Computer Science.
 Physics categories exhibit more modest increases, without major differences between them, except for a lower baseline in High Energy and Nuclear Physics.
-Differences among astrophysics subfields are even less significant.
+Differences among Astrophysics subfields are even less significant.
 
 
 \end{abstract}
@@ -46,14 +46,14 @@ Previous studies have demonstrated linguistic shifts in scientific language;
 notably, some studies have found a significant increase in the use of certain words and phrases since the introduction of ChatGPT \citep{Kobak2025,Bao2025,Juzek2024}.
 An interesting phenomenon highlighted by \citet{Lin2025} is the ``equalization'' of scientific language across countries of origin, characterized by a reduction in linguistic differences between native and non-native English-speaking authors.
 
-Prior studies have investigated linguistic shifts in general scientific writing and in select disciplines \citep{Xu2024,Kobak2025,Bao2025}, but to our knowledge, a systematic analysis focusing specifically on astrophysics has not yet been conducted.
-This work aims to fill this gap by examining the change in vocubalary in astrophysics abstracts since the introduction of ChatGPT, and comparing it to other branches of physics.
-We also investigate whether different subfields within astrophysics have been affected differently.
+Prior studies have investigated linguistic shifts in general scientific writing and in select disciplines \citep{Xu2024,Kobak2025,Bao2025}, but to our knowledge, a systematic analysis focusing specifically on Astrophysics has not yet been conducted.
+This work aims to fill this gap by examining the change in vocabulary in Astrophysics abstracts since the introduction of ChatGPT, and comparing it to other branches of physics.
+We also investigate whether different subfields within Astrophysics have been affected differently.
 
 
 \section{Methods}
 
-To gather the data, we use the arXiv API to collect abstracts from papers in each of the astrophysics subcategories (astro-ph.CO/EP/GA/HE/IM/SR) and several other physics categories (cond-mat, hep, nucl) as well as Computer Science (cs).
+To gather the data, we use the arXiv API to collect abstracts from papers in each of the Astrophysics subcategories (astro-ph.CO/EP/GA/HE/IM/SR) and several other physics categories (cond-mat, hep, nucl) as well as Computer Science (cs).
 Due to API limitations, we collect a maximum of 250 abstracts per month from each category, spanning from January 2019 to June 2025.
 
 In each abstract, we count the occurrences of each word in a predefined list of words (see Table~\ref{tab:factor_increase} for the word list).
@@ -62,7 +62,7 @@ The usage statistics are aggregated by yearly quarters and arXiv category.
 Figure~\ref{fig:word_usage_trends_example} shows an example of the usage trends of several words in the astro-ph category.
 
 To determine the factor increase in word usage, we calculate the ratio of the frequency of each word in abstracts after the introduction of ChatGPT to its frequency before.
-We then perform a z-test to assess the statistical significance of the change in frequency for each word.
+We then perform a z-test on the word frequencies prior compared to after the release of ChatGPT to assess the statistical significance of the change in frequency for each word.
 
 
 \section{Results}
@@ -72,20 +72,20 @@ Similarly to previous findings \citep{Juzek2024,Bao2025,Kobak2025}, words such a
 However, some words that were reported as overused, such as ``foster'', ``boast'', ``remarkable'', ``thereby'' and ``innovative'' have seen a significant increase in only some of the categories.
 In particular, all of these words' usage has increased significantly in the Computer Science category, but not in all of the physics categories.
 
-Regarding the different astrophysics subcategories, no particular trend was observed to distinguish between them.
+Regarding the different Astrophysics subcategories, no particular trend was observed to distinguish between them.
 
 We identify words that are strong suspects of being overused due to LLMs by looking for words that have seen a significant increase in usage of at least 50\% in at least 3 of the major categories (astro-ph, cond-mat, hep, nucl, cs).
 These words appear in Table~\ref{tab:factor_increase} in boldface.
 To quantify the overall influence of LLMs on scientific writing in each category, we define an \emph{``LLM influence score''} as number of appearances of these strong suspect words per abstract.
 
-Figures~\ref{fig:category_comparison} and \ref{fig:astro_subcat_comparison} show the LLM influence score over time in different arXiv categories and astro-ph subcategories, respectively.
-While there is no clear difference between the astrophysics subcategories, it seems that LLM-favored words were always more prevalent in astro-ph.IM (Instrumentation and Methods for Astrophysics) and in astro-ph.EP (Earth and Planetary Astrophysics).
+Figures~\ref{fig:category_comparison} and \ref{fig:astro_subcat_comparison} show the LLM influence score over time in different arXiv categories and Astrophysics subcategories, respectively.
+While there is no clear difference between the Astrophysics subcategories, it seems that LLM-favored words were always more prevalent in astro-ph.IM (Instrumentation and Methods for Astrophysics) and in astro-ph.EP (Earth and Planetary Astrophysics).
 
 The category comparison in Figure~\ref{fig:category_comparison} reveals that the Computer Science category has been the most affected by LLMs, with a significant increase in the LLM influence score after the introduction of ChatGPT.
 That remains true even after subtracting the baseline of LLM-favored words usage, which was higher in Computer Science abstracts than in physics even before the introduction of ChatGPT.
 
 Table~\ref{tab:expected_words_per_abstract_before_after} shows the expected number of LLM-favored words per abstract in each category, before and after the introduction of ChatGPT.
-Besides the clear strong influence on Computer Science, it can be seen that the in the changes in physics categories are more modest, and are similar to one another.
+Besides the clear strong influence on Computer Science, it can be seen that the changes in physics categories are more modest, and are similar to one another.
 Interestingly, High Energy Physics (hep) and Nuclear Physics (nucl) have had a lower baseline (LLM-favored word usage prior to ChatGPT) than Condensed Matter Physics (cond-mat) and Astrophysics (astro-ph).
 
 
@@ -131,22 +131,24 @@ cs & 0.462 & 1.053 & 0.591 \\
 
 \section{Summary \& Discussion}
 
-We analyzed vocabulary shifts in arXiv abstracts (from January 2019 to June 2025) across astrophysics subcategories, other physics (cond-mat, hep, nucl), and computer science.
-In this study, we investigated the impact of large language models (LLMs) on the vocabulary used in arXiv abstracts across astrophysics subcategories, several physics categories, and computer science.
+We analyzed vocabulary shifts in arXiv abstracts (from January 2019 to June 2025) across Astrophysics subcategories, other physics (cond-mat, hep, nucl), and Computer Science.
+In this study, we investigated the impact of large language models (LLMs) on the vocabulary used in arXiv abstracts across Astrophysics subcategories, several physics categories, and Computer Science.
 Our analysis revealed a significant increase in the usage of LLM-favored words in all categories following the introduction of ChatGPT.
-Computer science is the most strongly affected, whereas the physics categories show more modest increases that are similar to one another -- though High Energy Physics and Nuclear Physics have a lower baseline than Astrophysics and Condensed Matter Physics.
-No significant differences were observed between the astrophysics subcategories.
+Computer Science is the most strongly affected, whereas the physics categories show more modest increases that are similar to one another -- though High Energy Physics and Nuclear Physics have a lower baseline than Astrophysics and Condensed Matter Physics.
+No significant differences were observed between the Astrophysics subcategories.
 
 Future investigations could expand the vocabulary list to include more words and phrases associated with LLM-generated text, and could also analyze the full text of papers rather than just abstracts.
 In particular, a known effect of LLMs is the increased usage of em-dashes, which was not included in this study after it was found that abstracts rarely include em-dashes.
 A more thorough analysis should be able to estimate more confidently the percentage of papers that were written with the help of LLMs, and how that percentage varies across disciplines -- potentially revealing more pronounced effects than what we have been able to observe.
 
+\section*{Data Availability}
+The scripts used to generate the results in this paper are available at \url{https://github.com/elishamod/Scientific-Writing-Final-Project}.
 
 \section*{Acknowledgments}
 The author thanks his colleague Nadav Shoval for helpful discussions and comments.
 
 \bibliography{references}{}
-\bibliographystyle{aasjournalv7}
+\bibliographystyle{aasjournal}
 
 \appendix 
 \renewcommand{\thesection}{\Alph{section}}
@@ -163,7 +165,7 @@ The author thanks his colleague Nadav Shoval for helpful discussions and comment
 \caption{
 Example of word usage trends over time in the astro-ph category -- the fraction of abstracts containing each word is plotted over time (in quarters).
 The red vertical line indicates the introduction of ChatGPT (2022-Q4).
-The gray shaded area reprensents the mean fraction before and after the introduction of ChatGPT.
+The gray shaded area represents the mean fraction before and after the introduction of ChatGPT.
 }
 \label{fig:word_usage_trends_example}
 \end{figure*}
