@@ -1,11 +1,14 @@
 import pandas as pd
+import numpy as np
 import os
 import glob
 
 # === CONFIG ===
 path_pattern = "ztest/ztest_*.csv"  # Adjust path if needed
 output_tex_file = "ztest/colored_factor_increase_table.tex"
-max_shading_value = 5  # Anything >= this will get full blue (blue!100)
+output_csv_file = "ztest/combined_ztest.csv"
+min_shading_value = 0.6
+max_shading_value = 6
 
 # === Category order ===
 categories_in_order = ["astro-ph.CO", "astro-ph.EP", "astro-ph.GA", "astro-ph.HE",
@@ -26,24 +29,43 @@ for category in categories_in_order:
     df = df[df["Significant (p<0.05)"] == "✓"].copy()
 
     # Compute factor increase
-    df["Factor Increase"] = df.apply(
-        lambda row: round(row["After %"] / row["Before %"], 2) if row["Before %"] > 0 else None,
-        axis=1
-    )
+    def factor(row):
+        if row["Before %"] > 0:
+            return round(row["After %"] / row["Before %"], 2) 
+        elif row["After %"] > 0:
+            return -1
+        else:
+            return None
+
+    df["Factor Increase"] = df.apply(factor, axis=1)
 
     all_results[category] = df.set_index("Word")["Factor Increase"]
 
 # Combine into a full table
 combined_df = pd.DataFrame(all_results).sort_index()
 combined_df = combined_df.dropna(how="all")  # Drop words with no sig increase anywhere
+# Save combined CSV
+combined_df.to_csv(output_csv_file)
+print(f"Combined CSV written to: {output_csv_file}")
 
 # === Step 2: Apply LaTeX cell coloring ===
-def color_cell(val, max_val=max_shading_value):
-    """Return LaTeX code with blue shading based on value (capped)."""
+def color_cell(val, min_val=min_shading_value, max_val=max_shading_value,
+               positive_color="green", negative_color="red"):
+    """Return LaTeX code with color shading based on value (capped)."""
     if pd.isna(val):
         return ""
-    shade = int(min(val, max_val) / max_val * 100)
-    return r"\cellcolor{yellow!%d} %.2f" % (shade, val)
+    if val == -1:
+        return r"\cellcolor{%s!100} $\infty$" % positive_color
+    if val == 1.0:
+        return r"%.2f" % val
+    elif val > 1.0:
+        color = positive_color
+        logval = np.log(min(val, max_val)) / np.log(max_val)
+    else:
+        color = negative_color
+        logval = np.log(max(val, min_val)) / np.log(min_val)
+    shade = int(logval * 100)
+    return r"\cellcolor{%s!%d} %.2f" % (color, shade, val)
 
 colored_df = combined_df.applymap(color_cell)
 
